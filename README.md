@@ -1,8 +1,8 @@
 # mutable-devcontainer
 
-A VS Code Dev Container for hacking on [Mutable Instruments](https://github.com/pichenettes/eurorack) Eurorack module firmware. Works on macOS (including Apple Silicon via Rosetta), Linux, and Windows + WSL2.
+A VS Code Dev Container for hacking on [Mutable Instruments](https://github.com/pichenettes/eurorack) Eurorack module firmware. Works on macOS with Apple Silicon and should work on other platforms that support Docker as well. I made this because the [vagrant based dev environment](https://github.com/pichenettes/mutable-dev-environment) doesn't work on my M1 mac since I can't install a compatible version of VirtualBox.
 
-The container provides the full toolchain — ARM GCC 4.8 (the original Mutable Instruments version), AVR tools, OpenOCD, GDB, Python — and clones the [pichenettes/eurorack](https://github.com/pichenettes/eurorack) source on first start.
+The container provides the full toolchain — ARM GCC 4.8 (the original Mutable Instruments version), AVR tools, GDB, Python — and clones the [pichenettes/eurorack](https://github.com/pichenettes/eurorack) source on first start.
 
 ## Requirements
 
@@ -104,17 +104,10 @@ export PROGRAMMER=stk500
 export PROGRAMMER_PORT=/dev/ttyUSB0
 ```
 
-## Layout
-
-- `.devcontainer/Dockerfile` — toolchain image (ARM GCC 4.8, AVR tools, OpenOCD, Python 2 + 3, etc.).
-- `.devcontainer/devcontainer.json` — VS Code dev container config; preselects extensions and sets `OPENOCD_HOST`.
-- `scripts/bootstrap.sh` — runs once at container create; clones the eurorack source.
-- `start_openocd_host.sh` — convenience launcher for host-side OpenOCD against ST-Link V2.
-
 ## Credits
 
 - [pichenettes/eurorack](https://github.com/pichenettes/eurorack) — the Mutable Instruments module firmware itself, by Émilie Gillet. This repo only packages tooling around it.
-- [mqtthiqs/mutable-dev-environment](https://github.com/mqtthiqs/mutable-dev-environment) — the Vagrant-based dev environment this repo replaces.
+- [pichenettes/mutable-dev-environment](https://github.com/pichenettes/mutable-dev-environment) — the Vagrant-based dev environment this repo is based on.
 - Adafruit's [ARM-toolchain-vagrant](https://github.com/adafruit/ARM-toolchain-vagrant) and Novation's [launchpad-pro](https://github.com/dvhdr/launchpad-pro) — earlier inspirations for the upstream Vagrant setup.
 
 ## License
