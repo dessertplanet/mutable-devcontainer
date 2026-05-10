@@ -1,0 +1,29 @@
+{
+  "name": "Mutable Instruments",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "workspaceFolder": "/workspaces/mutable-dev-environment",
+  "runArgs": [
+    "--platform=linux/amd64",
+    "--add-host=host.docker.internal:host-gateway"
+  ],
+  "onCreateCommand": "bash /workspaces/mutable-dev-environment/scripts/bootstrap.sh",
+  "remoteEnv": {
+    "PGM_INTERFACE": "stlink-v2",
+    "PGM_INTERFACE_TYPE": "hla",
+    "OPENOCD_HOST": "host.docker.internal"
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "marus25.cortex-debug",
+        "ms-vscode.cpptools"
+      ],
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "cortex-debug.gdbPath": "gdb-multiarch"
+      }
+    }
+  }
+}

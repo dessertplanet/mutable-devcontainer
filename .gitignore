@@ -1,0 +1,7 @@
+# Cloned by scripts/bootstrap.sh; never tracked here.
+eurorack-modules/
+
+# Editor / OS
+.DS_Store
+.vscode/
+*.swp
