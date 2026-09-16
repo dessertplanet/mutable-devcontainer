@@ -3,12 +3,13 @@
   "build": {
     "dockerfile": "Dockerfile"
   },
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/mutable-dev-environment,type=bind",
   "workspaceFolder": "/workspaces/mutable-dev-environment",
   "runArgs": [
     "--platform=linux/amd64",
     "--add-host=host.docker.internal:host-gateway"
   ],
-  "onCreateCommand": "bash /workspaces/mutable-dev-environment/scripts/bootstrap.sh",
+  "onCreateCommand": "bash ${containerWorkspaceFolder}/scripts/bootstrap.sh ${containerWorkspaceFolder}",
   "remoteEnv": {
     "PGM_INTERFACE": "stlink-v2",
     "PGM_INTERFACE_TYPE": "hla",

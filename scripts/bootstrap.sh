@@ -3,7 +3,7 @@
 # Clones the Mutable Instruments eurorack repo and initialises submodules.
 set -euo pipefail
 
-WORKSPACE="${1:-/workspaces/mutable-dev-environment}"
+WORKSPACE="${1:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)}"
 WORKING_DIR_NAME="eurorack-modules"
 DEV_ENV="${WORKSPACE}/${WORKING_DIR_NAME}"
 MI_REPO="https://github.com/pichenettes/eurorack.git"
