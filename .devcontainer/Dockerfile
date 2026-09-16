@@ -30,10 +30,6 @@ RUN dpkg --add-architecture i386 \
         gdb-multiarch \
         python2.7 \
         python3 \
-        python3-numpy \
-        python3-scipy \
-        python3-matplotlib \
-        python3-serial \
         gcc-avr \
         binutils-avr \
         avr-libc \
@@ -59,6 +55,18 @@ RUN ln -s /usr /usr/local/CrossPack-AVR
 # Mutable Instruments tooling invokes `python` (Python 2). Ubuntu 22.04 does
 # not provide an unversioned `python` symlink, so create one explicitly.
 RUN ln -s /usr/bin/python2.7 /usr/local/bin/python
+
+# The resource compilers (stmlib/tools/resources_compiler.py and friends) import
+# numpy/scipy/matplotlib under Python 2. Ubuntu 22.04 dropped the python-*
+# packages, so install the last Python 2 releases from PyPI via get-pip.
+RUN wget -q https://bootstrap.pypa.io/pip/2.7/get-pip.py -O /tmp/get-pip.py \
+    && python2.7 /tmp/get-pip.py \
+    && python2.7 -m pip install --no-cache-dir \
+        numpy==1.16.6 \
+        scipy==1.2.3 \
+        matplotlib==2.2.5 \
+        pyserial==3.5 \
+    && rm /tmp/get-pip.py
 
 # ---------------------------------------------------------------------------
 # Python / locale
